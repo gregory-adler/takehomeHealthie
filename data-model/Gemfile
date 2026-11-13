@@ -1,0 +1,11 @@
+source "https://rubygems.org"
+
+ruby ">= 3.2"
+
+# Just ActiveRecord (the Rails ORM) and SQLite. No full Rails app needed
+# to model the data, and these models would drop into a Rails app unchanged.
+gem "activerecord", "~> 8.0"
+gem "sqlite3", "~> 2.1"
+
+gem "irb"      # for bin/console
+gem "minitest" # for test/models_test.rb

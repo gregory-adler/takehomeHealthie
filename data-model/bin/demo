@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+# Runs the 4 required queries against the seed data and prints the results,
+# plus the SQL that ActiveRecord generates for each one.
+#
+#   bin/demo
+
+require_relative "../config/environment"
+require_relative "../db/seeds"
+
+rivera = Provider.find_by!(email: "maya.rivera@example.com")
+sam    = Client.find_by!(email: "sam@example.com")
+
+def show(title, relation)
+  puts "\n== #{title}"
+  puts "   SQL: #{relation.to_sql}"
+  relation.each { |record| yield record }
+end
+
+# 1. All clients for a given provider
+show("Clients of #{rivera.name}", rivera.clients) do |client|
+  puts "   - #{client.name} (#{client.plan_with(rivera)})"
+end
+
+# 2. All providers for a given client
+show("Providers of #{sam.name}", sam.providers) do |provider|
+  puts "   - #{provider.name} (#{sam.plan_with(provider)})"
+end
+
+# 3. All journal entries for a given client, sorted by date
+show("Journal entries by #{sam.name}, newest first", sam.journal_entries.newest_first) do |entry|
+  puts "   - #{entry.created_at.to_date}  #{entry.body}"
+end
+
+# 4. All journal entries across all clients of a given provider, sorted by date
+# includes(:client) loads all the clients in one extra query up front.
+# Without it, entry.client below would run one query per entry (an "N+1").
+show("Journal entries from all of #{rivera.name}'s clients, newest first",
+     rivera.journal_entries.newest_first.includes(:client)) do |entry|
+  puts "   - #{entry.created_at.to_date}  #{entry.client.name}: #{entry.body}"
+end
+
+puts

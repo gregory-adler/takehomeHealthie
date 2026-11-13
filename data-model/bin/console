@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+# An interactive Ruby prompt with the models and seed data loaded.
+# This is the equivalent of `rails console`. Use it to try queries live.
+#
+#   bin/console
+
+require_relative "../config/environment"
+require_relative "../db/seeds"
+require "irb"
+
+puts <<~HELP
+
+  Models and seed data loaded. Try:
+
+    rivera = Provider.first
+    sam    = Client.find_by(email: "sam@example.com")
+
+    rivera.clients
+    sam.providers
+    sam.journal_entries.newest_first
+    rivera.journal_entries.newest_first
+
+    rivera.journal_entries.newest_first.to_sql   # see the SQL
+    Subscription.premium                         # all premium subscriptions
+
+HELP
+
+IRB.start(__FILE__)
