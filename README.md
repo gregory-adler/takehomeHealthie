@@ -22,8 +22,6 @@ ruby bin/demo              # runs the 4 queries, prints results and the SQL behi
 ruby bin/console           # interactive prompt with the models and seed data loaded
 ```
 
-To log every SQL query as it runs: `SQL=1 ruby bin/demo` on Mac/Linux, or `$env:SQL=1; ruby bin/demo` in PowerShell.
-
 ### Schema
 
 ```
@@ -105,9 +103,9 @@ src/
 ### Decisions
 
 - **Board state is items stored by id, plus an ordered list of ids for each column.** The column an item is in is its status, and its position in the list is its order, so moving between columns and reordering use the same logic
-- **All board changes go through one reducer.** Makes the logic easy to test without rendering, and gives one place to add persistence or undo later.
+- **All board changes go through one reducer.** Makes the logic easy to test, gives one place to add persistence or undo later.
 - **`@hello-pangea/dnd` for drag and drop.** Maintained fork of `react-beautiful-dnd`, built for list/column UIs and supports keyboard dragging. 
-- **Each card stores a copy of its character, not just the id.** Card can render on its own and won't depend on the API after a reload once persistence is added.
+- **Each card stores a copy of its character, not just the id.** Card can render on its own and won't depend on  API
 - **Only loads the first page of characters (20).** Proof of concept
 
 ### Not done yet
