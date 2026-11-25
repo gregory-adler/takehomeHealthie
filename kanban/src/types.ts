@@ -5,7 +5,7 @@ export type Character = {
   species: string;
 };
 
-export type ColumnId = "todo" | "doing" | "done";
+export type ColumnId = "todo" | "inProgress" | "done";
 
 export type Item = {
   id: string;
@@ -20,12 +20,12 @@ export type BoardState = {
   // Every item, looked up by id
   items: Record<string, Item>;
   // Each column is an ordered list of item ids. The column an id sits in
-  // is the item's status, and its position in the list is its order.
+  // is the item's status, and its position in the lissot is its order.
   columns: Record<ColumnId, string[]>;
 };
 
 export const COLUMNS: { id: ColumnId; title: string }[] = [
   { id: "todo", title: "To Do" },
-  { id: "doing", title: "Doing" },
+  { id: "inProgress", title: "In Progress" },
   { id: "done", title: "Done" },
 ];

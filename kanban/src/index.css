@@ -9,7 +9,7 @@
 
   /* One accent color per column */
   --todo: #6366f1;
-  --doing: #f59e0b;
+  --in-progress: #f59e0b;
   --done: #10b981;
 
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -99,7 +99,7 @@ h1 {
 }
 
 .column-todo  { --column-color: var(--todo); }
-.column-doing { --column-color: var(--doing); }
+.column-inProgress { --column-color: var(--in-progress); }
 .column-done  { --column-color: var(--done); }
 
 .column h2 {
