@@ -21,7 +21,8 @@ type CharactersResponse = {
   errors?: { message: string }[];
 };
 
-// GraphQL is HTTP POST with the query in the body,
+// GraphQL is just an HTTP POST with the query in the body,
+// so plain fetch works and we don't need a client library like Apollo.
 export async function fetchCharacters(page = 1): Promise<Character[]> {
   const response = await fetch(API_URL, {
     method: "POST",
